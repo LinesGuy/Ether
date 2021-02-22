@@ -1,7 +1,16 @@
 import pygame
+import EntityManager
+import Player
 
+entity_manager = EntityManager.entity_manager
     
 def game(screen):
+    # /`````INIT`````\
+
+    entity_manager.add(Player.Player((640, 360)))
+
+    # \_____INIT_____/
+
     running = True
     while (running):
 
@@ -15,6 +24,9 @@ def game(screen):
         # \_____PYGAME_____/
 
         # /```UPDATE```\
+
+        entity_manager.update()
+        print(1)
 
         #p.update_velocity()
         #p.update_bearings()
@@ -51,6 +63,8 @@ def game(screen):
         # /``````DRAW``````\
 
         screen.fill((0, 0, 0))  # Black
+
+        entity_manager.draw(screen)
 
     #    c.draw_gridlines()
 

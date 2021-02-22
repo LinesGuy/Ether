@@ -1,6 +1,6 @@
 import pygame
 
-class egg_particle():
+class Particle():
     particles_list = list()
 
     def __init__(self, colour, x, y, bearing, speed, lifespan):
