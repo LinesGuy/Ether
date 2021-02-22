@@ -4,7 +4,7 @@ import Particle
 import Bullet
 import Player
 
-class entity_manager:
+class EntityManager:
     entities = list()
     enemies = list()
     bullets = list()

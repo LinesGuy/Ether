@@ -1,37 +1,26 @@
 import pygame
-import EntityManager
 import Player
-
-entity_manager = EntityManager.entity_manager
+import Input
+import EntityManager
     
 def game(screen):
     # /`````INIT`````\
-
-    entity_manager.add(Player.Player((640, 360)))
-
+    EntityManager.EntityManager.add(Player.Player([640, 360]))
     # \_____INIT_____/
 
     running = True
     while (running):
-
-        # /`````PYGAME`````\
+        # /```UPDATE```\
         
         events = pygame.event.get()
         for event in events:
-            if (event.type == pygame.QUIT):
+            if event.type == pygame.QUIT:
                 running = False
-        
-        # \_____PYGAME_____/
 
-        # /```UPDATE```\
+        Input.Input.update(events)
+        EntityManager.EntityManager.update()
+        # enemy spawner update
 
-        entity_manager.update()
-        print(1)
-
-        #p.update_velocity()
-        #p.update_bearings()
-        #p.update_position()
-        # c.move_absolute((p.x, p.y))
         #c.egg_cam((p.x, p.y))
 
     #    keys = pygame.key.get_pressed()
@@ -64,7 +53,7 @@ def game(screen):
 
         screen.fill((0, 0, 0))  # Black
 
-        entity_manager.draw(screen)
+        EntityManager.EntityManager.draw(screen)
 
     #    c.draw_gridlines()
 

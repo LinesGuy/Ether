@@ -2,21 +2,42 @@ import pygame
 import Entity
 import os
 import math
+import Input
+import Exts
 from Art import Player as Player_sprite
 
 class Player(Entity.Entity):
     
-    def __init__(self, position=(0, 0)):
+    def __init__(self, position=[0, 0]):
         super().__init__(position, Player_sprite)
+        self.radius = 10
         self.COOLDOWN_FRAMES = 6
         self.cooldown_remaining = 0
         self.frames_until_respawn = 0        
         
     def is_dead(self):
         return self.frames_until_respawn > 0
+    
+    def kill(self):
+        self.frames_until_respawn = 60
 
     def update(self):
-        pass
+        if (self.is_dead()):
+            self.frames_until_respawn -= 1
+            return
+        
+        # Movement stuffs
+        SPEED = 8
+        direction = Input.Input.get_movement_direction()
+        velocity = [direction[0] * SPEED, direction[1] * SPEED]
+        self.position[0] += velocity[0]
+        self.position[1] += velocity[1]
+
+        # Set orientation
+        if velocity[0] ** 2 + velocity[1] ** 2 > 0:
+            self.orientation = Exts.vector2_to_angle(velocity)
+
+        
 
 #    def player_bullet(self):
 #        yield bullet("player", self.x, self.y, self.aim_bearing, 30, 300)
