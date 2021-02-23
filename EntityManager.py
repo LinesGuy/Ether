@@ -64,6 +64,6 @@ class EntityManager:
         cls.players = list(filter(lambda e: not e.is_expired, cls.players))
     
     @classmethod
-    def draw(cls, screen):
+    def draw(cls):
         for entity in cls.entities:
-            entity.draw(screen)
+            entity.draw()

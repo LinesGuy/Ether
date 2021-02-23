@@ -27,8 +27,8 @@ class Entity(object):
     def update(self):
         pass
 
-    def draw(self, screen):
-        # screen.draw stuff
+    def draw(self):
+        screen = pygame.display.get_surface()
         rotated = pygame.transform.rotate(
             self.image, math.degrees(-self.orientation))
         rotated_rect = rotated.get_rect()

@@ -44,7 +44,7 @@ class Input:
         mouse_position = list[pygame.mouse.get_pos()]
         direction = [mouse_position[0] - player.position[0],
                      mouse_position[1] - player.position[1]]
-        return exts.normalise_vector2(direction)
+        return Exts.normalise_vector2(direction)
 
 
 class mouse:

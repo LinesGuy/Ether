@@ -1,10 +1,12 @@
 import pygame
 import Player
 import Input
+import DebugText
 import EntityManager
     
-def game(screen):
+def game():
     # /`````INIT`````\
+    screen = pygame.display.get_surface()
     EntityManager.EntityManager.add(Player.Player([640, 360]))
     # \_____INIT_____/
 
@@ -53,7 +55,13 @@ def game(screen):
 
         screen.fill((0, 0, 0))  # Black
 
-        EntityManager.EntityManager.draw(screen)
+        EntityManager.EntityManager.draw()
+
+        # /DEBUG DRAW\
+        DebugText.disp("asdf", 0)
+        DebugText.disp("fdsa", 1)
+        DebugText.disp("spam", 3)
+        # \DEBUG DRAW/
 
     #    c.draw_gridlines()
 
