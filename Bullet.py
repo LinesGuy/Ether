@@ -1,5 +1,6 @@
 import pygame
 
+# all outdated code
 class bullet():
     bullet_list = list()
 

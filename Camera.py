@@ -1,10 +1,9 @@
 import pygame
-from player import *
 
 class camera:
-    x = 0
-    y = 0
+    position = pygame.Vector2()
     zoom = 1
+    orientation = 0 # Radians
 
     # (x,y) represent the MIDDLE of the camera, NOT the upper-left corner.
     
@@ -12,10 +11,12 @@ class camera:
     def move_absolute(cls, coords):
         cls.x, cls.y = coords
 
-    def move_relative(self, x_amount, y_amount):
-        self.x += x_amount
-        self.y += y_amount
+    @classmethod
+    def move_relative(cls, delta_x, delta_y):
+        cls.x += delta_x
+        cls.y += delta_y
 
+    # LERP CAM
     @classmethod
     def egg_cam(cls, coords): # temp name but probably will forget to rename it :shrug:
         # egg = 1: camera is locked to player

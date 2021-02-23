@@ -21,17 +21,20 @@ class Input:
 
     @classmethod
     def get_movement_direction(cls):
-        direction = [0, 0]
+        direction = pygame.Vector2(0, 0)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
-            direction[0] -= 1
+            direction.x -= 1
         if keys[pygame.K_d]:
-            direction[0] += 1
+            direction.x += 1
         if keys[pygame.K_w]:
-            direction[1] -= 1
+            direction.y -= 1
         if keys[pygame.K_s]:
-            direction[1] += 1
-        return Exts.normalise_vector2(direction)
+            direction.y += 1
+        if direction.x == direction.y == 0:
+            return pygame.Vector2(0, 0)
+        else:
+            return direction.normalize()
     
     @classmethod
     def get_aim_direction(cls, player):

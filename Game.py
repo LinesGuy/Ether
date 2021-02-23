@@ -58,9 +58,7 @@ def game():
         EntityManager.EntityManager.draw()
 
         # /DEBUG DRAW\
-        DebugText.disp("asdf", 0)
-        DebugText.disp("fdsa", 1)
-        DebugText.disp("spam", 3)
+        # DebugText.disp("asdf", 0)
         # \DEBUG DRAW/
 
     #    c.draw_gridlines()
