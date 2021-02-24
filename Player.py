@@ -13,13 +13,25 @@ class Player(Entity.Entity):
         self.radius = 10
         self.COOLDOWN_FRAMES = 6
         self.cooldown_remaining = 0
-        self.frames_until_respawn = 0        
+        self.frames_until_respawn = 0
+        self.autofire = True  # If false, player has to hold left click to NOT shoot. (not actually implemented yet) 
         
     def is_dead(self):
         return self.frames_until_respawn > 0
     
     def kill(self):
         self.frames_until_respawn = 60
+    
+    def draw(self):
+        super().draw()
+        # debug line:
+        screen = pygame.display.get_surface()
+        aim_v = Input.Input.get_aim_direction(self)  # Aim vector
+        aim_r = math.radians(-aim_v.angle_to(pygame.Vector2(0, 0)))  # Aim angle (radians)
+
+        # ^ Aim directions in radians
+        pygame.draw.line(screen, (0, 255, 0), (self.position),
+            (self.position.x + math.cos(aim_r) * 100, self.position.y + math.sin(aim_r) * 100), 3)
 
     def update(self):
         if (self.is_dead()):
@@ -31,11 +43,11 @@ class Player(Entity.Entity):
         direction = Input.Input.get_movement_direction()
         self.velocity = SPEED * direction
         self.position += self.velocity
+        # Here I would clamp the player position but I plan to instead
+        # move the camera around.
 
-        self.orientation = self.velocity.angle_to(pygame.Vector2(0, 1))
-        # Set orientation
-#        if velocity[0] ** 2 + velocity[1] ** 2 > 0:
-#            self.orientation = Exts.vector2_to_angle(velocity)
+        if self.velocity != pygame.Vector2(0, 0):
+            self.orientation = self.velocity.angle_to(pygame.Vector2(0, 0))
 
         
 

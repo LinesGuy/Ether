@@ -1,3 +1,7 @@
 {
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    // Whitelist NumPy to remove lint errors
+    "python.linting.pylintArgs": [
+        "--extension-pkg-whitelist=pygame"
+    ]
 }

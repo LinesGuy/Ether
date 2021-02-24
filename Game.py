@@ -7,7 +7,7 @@ import EntityManager
 def game():
     # /`````INIT`````\
     screen = pygame.display.get_surface()
-    EntityManager.EntityManager.add(Player.Player([640, 360]))
+    EntityManager.EntityManager.add(Player.Player(pygame.Vector2(640, 360)))
     # \_____INIT_____/
 
     running = True
