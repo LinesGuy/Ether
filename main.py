@@ -1,15 +1,15 @@
-import pygame
-import math
-import Game
+"""Initialises pygame and decides which screen to show
+(currently only Game.game())"""
 
-fps = 60
+import pygame
+import game
 
 pygame.init()
 
 screen = pygame.display.set_mode((1280, 720))
 #width, height = pygame.display.get_surface().get_size()
 
-Game.game()
+game.game()
 
 # Ok, Ciao!
-pygame.quit()    
+pygame.quit()

@@ -1,11 +1,13 @@
+"""The Entity class. Stored as entity_abc.py because naming issues."""
+
 import pygame
-import math
-import Exts
-from Art import Default as Default_Sprite
+
+from art import Default as Default_Sprite
 
 WHITE = (255, 255, 255)
 
 class Entity(object):
+    """Entity class used for players, enemies, bullets, spawners, etc."""
 
     def __init__(self, position=pygame.Vector2(), image=Default_Sprite):
         self.position = position
@@ -17,18 +19,13 @@ class Entity(object):
         self.orientation = 0 # Degrees
         self.radius = 20  # Used for circular collision detection
         self.is_expired = False
-    
-    # Is this ever even used?
-#    def size(self):
-#        if self.image is None:
-#            return [0, 0]
-#        else:
-#            return [self.image.get_width(), self.image.get_height()]
-    
+
     def update(self):
-        pass
+        """Update the entity (e.g moving/thinking/shooting)"""
+        return
 
     def draw(self):
+        """Draw this entity on the screen"""
         screen = pygame.display.get_surface()
         rotated = pygame.transform.rotate(
             self.image, self.orientation)

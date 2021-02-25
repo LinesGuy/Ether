@@ -1,61 +1,38 @@
+"""The main game loop"""
+
 import pygame
-import Player
-import Input
-import DebugText
-import EntityManager
-    
+import player
+import user_input
+import entity_manager
+
+
 def game():
+    """The main game loop"""
     # /`````INIT`````\
     screen = pygame.display.get_surface()
-    EntityManager.EntityManager.add(Player.Player(pygame.Vector2(640, 360)))
+    entity_manager.EntityManager.add(player.Player(pygame.Vector2(640, 360)))
     # \_____INIT_____/
 
     running = True
-    while (running):
+    while running:
         # /```UPDATE```\
-        
+
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
                 running = False
 
-        Input.Input.update(events)
-        EntityManager.EntityManager.update()
+        user_input.Input.update(events)
+        entity_manager.EntityManager.update()
         # enemy spawner update
 
-        #c.egg_cam((p.x, p.y))
-
-    #    keys = pygame.key.get_pressed()
-        #if (keys):
-            #p.get_movement_keypresses(keys)
-    #
-        #if any([keys[pygame.K_a], keys[pygame.K_d], keys[pygame.K_w], keys[pygame.K_s]]):
-            #for i in range(3):
-                #particles += p.create_movement_particle()
-            
-        #mouse.update_position()
-    #
-        #backfire = 8
-    #    if (mouse.clicked):
-    #        bullets += p.player_bullet()
-    #        c.move_relative(math.cos(-p.aim_bearing)*backfire, math.sin(p.aim_bearing)*backfire)
-    #    elif (mouse.held_frames % 10 == 0 and mouse.held_frames > 0):
-    #        bullets += p.player_bullet()
-    #        c.move_relative(math.cos(-p.aim_bearing)*backfire, math.sin(p.aim_bearing)*backfire)
-    #
-    #    for b in bullets:
-    #        b.update()
-    #
-    #    for particle in particles:
-    #        particle.update()
-        
         # \___UPDATE___/
 
         # /``````DRAW``````\
 
         screen.fill((0, 0, 0))  # Black
 
-        EntityManager.EntityManager.draw()
+        entity_manager.EntityManager.draw()
 
         # /DEBUG DRAW\
         # DebugText.disp("asdf", 0)
