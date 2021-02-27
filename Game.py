@@ -15,6 +15,8 @@ def game():
 
     running = True
     while running:
+        screen.fill((0, 0, 0))  # Black
+        # ^ This comes before DRAW to allow for any debug texts
         # /```UPDATE```\
 
         events = pygame.event.get()
@@ -30,8 +32,6 @@ def game():
 
         # /``````DRAW``````\
 
-        screen.fill((0, 0, 0))  # Black
-
         entity_manager.EntityManager.draw()
 
         # /DEBUG DRAW\
@@ -39,20 +39,6 @@ def game():
         # \DEBUG DRAW/
 
     #    c.draw_gridlines()
-
-        #p.draw()
-
-        #mouse.draw()
-
-    #    for index, b in enumerate(bullets):
-    #        b.draw()
-    #        if (b.age > b.lifespan):
-    #            del bullets[index]
-
-    #    for index, particle in enumerate(particles):
-    #        particle.draw()
-    #        if (particle.age > particle.lifespan):
-    #            del particles[index]
 
         pygame.display.flip()
         pygame.time.Clock().tick(60)

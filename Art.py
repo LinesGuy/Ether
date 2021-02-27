@@ -5,5 +5,6 @@ import pygame
 
 IMG_DIR = "sprites"
 
-Default = pygame.image.load(os.path.join(IMG_DIR, "Default.png"))
-Player = pygame.image.load(os.path.join(IMG_DIR, "Player.png"))
+Default_sprite = pygame.image.load(os.path.join(IMG_DIR, "Default.png"))
+Player_sprite = pygame.image.load(os.path.join(IMG_DIR, "Player.png"))
+Bullet_sprite = pygame.image.load(os.path.join(IMG_DIR, "Bullet.png"))

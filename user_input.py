@@ -53,7 +53,7 @@ class Input:
     def get_mouse_aim_direction(cls, player) -> pygame.Vector2:
         """Returns unit vector of players aim using the mouse"""
         mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
-        direction = mouse_pos - player.position
+        direction = mouse_pos - player.pos
         if direction.length_squared()  == 0:
             return direction
         else:

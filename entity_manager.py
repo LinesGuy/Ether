@@ -1,12 +1,15 @@
 """Stores the EntityManager class"""
 
 import player
+import debug
+import bullet
 
 class EntityManager:
     """Stores entity lists and allows for updating/drawing
     all entities at once."""
     entities = list()
     players = list()
+    bullets = list()
 
     is_updating = False
     added_entities = list()
@@ -34,9 +37,11 @@ class EntityManager:
 
         if isinstance(entity, player.Player):
             cls.players.append(entity)
+        elif isinstance(entity, bullet.Bullet):
+            cls.bullets.append(entity)
         else:
             # This should never happen
-            print("Error in entitymanager.py, add_entity, 'else'")
+            print(f"Error in EntityManager.add_entity, entity is\n{entity}")
 
     @classmethod
     def update(cls):
