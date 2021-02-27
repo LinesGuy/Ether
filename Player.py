@@ -57,7 +57,7 @@ class Player(entity_abc.Entity):
 
         if velocity != pygame.Vector2(0, 0):
             self.orientation = velocity.angle_to(pygame.Vector2(0, 0))
-        
+
         # Shooty stuffs
         aim_direction = user_input.Input.get_aim_direction(self) # Unit vector
         aim = aim_direction * 10
@@ -68,6 +68,6 @@ class Player(entity_abc.Entity):
             offset_pos = self.pos * 1
 
             entity_manager.EntityManager.add(bullet.Bullet(offset_pos, aim))
-        
+
         if self.cooldown_remaining > 0:
             self.cooldown_remaining -= 1

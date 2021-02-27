@@ -5,8 +5,8 @@ from art import Bullet_sprite
 import entity_abc
 
 class Bullet(entity_abc.Entity):
-    "Bullet class based off Entity class. Bullets can be fired from the "
-    "players or entities. Expires after 5 seconds or going off-screen."
+    """Bullet class based off Entity class. Bullets can be fired from the
+     players or entities. Expires after 5 seconds or going off-screen."""
 
     def __init__(self, pos, velocity, lifespan=300):
         super().__init__(pos, Bullet_sprite)

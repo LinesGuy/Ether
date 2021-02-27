@@ -1,7 +1,6 @@
 """Stores the EntityManager class"""
 
 import player
-import debug
 import bullet
 
 class EntityManager:
