@@ -22,6 +22,12 @@ class Input:
         cls.events = [e for e in events if e.type == pygame.KEYDOWN]
 
     @classmethod
+    def get_mouse_state(cls):
+        """Returns left and right click button states"""
+        left_click, right_click, _ = pygame.mouse.get_pressed(num_buttons=3)
+        return (left_click, right_click)
+
+    @classmethod
     def get_movement_direction(cls):
         """Get unit vector of direction player is moving"""
         direction = pygame.Vector2(0, 0)
