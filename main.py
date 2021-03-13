@@ -3,6 +3,7 @@ from entity_manager import EntityManager
 from camera import Camera
 from user_input import Input
 from player import Player
+import time
 
 # INIT
 pg.init()
@@ -12,10 +13,13 @@ screen = pg.display.set_mode(Camera.WINDOW_SIZE)
 display = pg.Surface(Camera.DISPLAY_SIZE)
 
 EntityManager.add(Player())
+frame = 0
 # INIT END
 
 running = True
 while running:
+    start_time = time.time()
+    frame += 1
     display.fill((0,0,0))
 
     # UPDATE
@@ -41,5 +45,6 @@ while running:
     pg.display.update()
 
     # DRAW END
+    if frame % 60 == 0: print(round((time.time() - start_time)*1000, 3), "ms")
 
     clock.tick(60)
