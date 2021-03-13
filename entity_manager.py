@@ -24,9 +24,9 @@ class EntityManager:
         If currently iterating through entity list then add it to
         pending entites."""
         if cls.is_updating:
-            cls.add_entity(entity)
-        else:
             cls.added_entities.append(entity)
+        else:
+            cls.add_entity(entity)
 
     @classmethod
     def add_entity(cls, entity):
