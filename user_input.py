@@ -44,6 +44,21 @@ class Input:
             return direction.normalize()
 
     @classmethod
+    def move_camera(cls):
+        """Get arrow key inputs and move camera accordingly"""
+        direction = pg.Vector2(0, 0)
+        if cls.keys[pg.K_LEFT]:
+            direction.x -=1
+        if cls.keys[pg.K_RIGHT]:
+            direction.x += 1
+        if cls.keys[pg.K_UP]:
+            direction.y -= 1
+        if cls.keys[pg.K_DOWN]:
+            direction.y += 1
+        direction *= 5
+        Camera.move_relative(direction)
+
+    @classmethod
     def get_aim_bearing(cls, pos):
         """Returns an angle in degrees representing the aim bearing"""
         aim_direction = cls.get_aim_direction(pos)

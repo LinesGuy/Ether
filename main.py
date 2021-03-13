@@ -3,6 +3,7 @@ from entity_manager import EntityManager
 from camera import Camera
 from user_input import Input
 from player import Player
+import debug
 import time
 
 # INIT
@@ -11,7 +12,6 @@ clock = pg.time.Clock()
 Camera.set_dimensions((1200, 800), scale=4)
 screen = pg.display.set_mode(Camera.WINDOW_SIZE)
 display = pg.Surface(Camera.DISPLAY_SIZE)
-
 EntityManager.add(Player())
 frame = 0
 # INIT END
@@ -33,6 +33,8 @@ while running:
                 running = False
 
     Input.update()
+    Input.move_camera()  # Probably can be moved to Input.update()
+    Camera.lerp(EntityManager.player.pos - pg.Vector2(Camera.DISPLAY_SIZE) / 2)
     EntityManager.update()
 
     # UPDATE END
@@ -42,6 +44,7 @@ while running:
 
     surf = pg.transform.scale(display, Camera.WINDOW_SIZE)
     screen.blit(surf, (0, 0))
+    debug.text(f"Camera.pos: {Camera.pos}")
     pg.display.update()
 
     # DRAW END
