@@ -1,65 +1,59 @@
-"""The Input class"""
+"""da Input class"""
 
-import pygame
+import pygame as pg
+from camera import Camera
 
 class Input:
-    """Functions for getting/handling user inputs"""
-    events = list()
-    last_events = list()
+    """Functions for getting and handling user inputs"""
 
-    is_aiming_with_mouse = True
+    keys = None
+    last_keys = None
 
-    @staticmethod
-    def mouse_position():
-        """Returns the mouse position"""
+    @property
+    def mouse_position(self):
+        """Returns the mouse position on the screen"""
         # cba
         return
 
     @classmethod
-    def update(cls, events):
+    def update(cls):
         """Save previous keyboard and mouse inputs and update to new inputs"""
-        cls.last_events = cls.events
-        cls.events = [e for e in events if e.type == pygame.KEYDOWN]
+        cls.last_keys = cls.keys
+        cls.keys = pg.key.get_pressed()
 
     @classmethod
-    def get_mouse_state(cls):
-        """Returns left and right click button states"""
-        left_click, right_click, _ = pygame.mouse.get_pressed(num_buttons=3)
-        return (left_click, right_click)
+    def check_just_pressed(cls, k):
+        """Returns whether or not a given key was just pressed"""
+        return cls.keys[k] and not cls.last_keys[k]
 
     @classmethod
     def get_movement_direction(cls):
-        """Get unit vector of direction player is moving"""
-        direction = pygame.Vector2(0, 0)
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_a]:
+        """Get unit vector of diretction player is moving"""
+        direction = pg.Vector2(0, 0)
+        if cls.keys[pg.K_a]:
             direction.x -= 1
-        if keys[pygame.K_d]:
+        if cls.keys[pg.K_d]:
             direction.x += 1
-        if keys[pygame.K_w]:
+        if cls.keys[pg.K_w]:
             direction.y -= 1
-        if keys[pygame.K_s]:
+        if cls.keys[pg.K_s]:
             direction.y += 1
         if direction.x == direction.y == 0:
-            return pygame.Vector2(0, 0)
+            return pg.Vector2(0, 0)
         else:
             return direction.normalize()
 
     @classmethod
-    def get_aim_direction(cls, player) -> pygame.Vector2:
-        """Returns a unit vector of the players aim, whether
-        they are using a mouse or keyboard to aim."""
-        if cls.is_aiming_with_mouse:
-            return cls.get_mouse_aim_direction(player)
-        else:
-            # keyboard aim stuff here
-            return pygame.Vector2(0, 0)
-
+    def get_aim_bearing(cls, pos):
+        """Returns an angle in degrees representing the aim bearing"""
+        aim_direction = cls.get_aim_direction(pos)
+        bearing = pg.Vector2(0, 0).angle_to(aim_direction)
+        return bearing
     @classmethod
-    def get_mouse_aim_direction(cls, player) -> pygame.Vector2:
-        """Returns unit vector of players aim using the mouse"""
-        mouse_pos = pygame.Vector2(pygame.mouse.get_pos())
-        direction = mouse_pos - player.pos
+    def get_aim_direction(cls, pos) -> pg.Vector2:
+        """Returns a unit vector from a given position to the mouse position"""
+        mouse_pos = Camera.get_mouse_coords()
+        direction = mouse_pos - pos
         if direction.length_squared()  == 0:
             return direction
         else:

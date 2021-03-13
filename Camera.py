@@ -1,31 +1,45 @@
 """Stores the Camera class"""
 
-import pygame
-import numpy as np
+import pygame as pg
 
 class Camera:
-    """The camera of the world with various functions to move/rotate/zoom the
-camera or follow the player."""
+    """Camera of the world with various functoins to move the camera
+    and/or follow the player"""
 
-    pos = pygame.Vector2(0, 0)
-    zoom = 1
-    orientation = 0 # Radians
+    WINDOW_SIZE = None
+    PIXEL_SCALE = None
+    DISPLAY_SIZE = None
 
-    # (x,y) represent the MIDDLE of the camera, NOT the upper-left corner.
+    pos = pg.Vector2(0, 0)
+    # ^ Represents the top-left of the screen
 
     @classmethod
-    def move_absolute(cls, destination: pygame.Vector2):
-        """Moves camera to given coordinates"""
+    def set_dimensions(cls, WINDOW_SIZE: tuple, scale: int):
+        cls.WINDOW_SIZE = WINDOW_SIZE
+        cls.DISPLAY_SIZE = tuple(pg.Vector2(WINDOW_SIZE) / scale)
+        cls.PIXEL_SCALE = scale
+        cls.pos -= pg.Vector2(cls.DISPLAY_SIZE) / 2
+
+    @classmethod
+    def get_mouse_coords(cls):
+        """Gets coordinates of mouse in the world, not on the screen"""
+        mouse_pos = pg.Vector2(pg.mouse.get_pos()) / Camera.PIXEL_SCALE
+        mouse_world_pos = mouse_pos + Camera.pos
+        return mouse_world_pos
+
+    @classmethod
+    def move_absolute(cls, destination):
+        """Moves camera to given coordinates. Remember to provide the top-left
+        of the screen, not the middle. move_relative is recommended."""
         cls.pos = destination
 
     @classmethod
-    def move_relative(cls, delta: pygame.Vector2):
-        """Moves camera relative to its current position"""
+    def move_relative(cls, delta):
+        """Moves camera relative to current position"""
         cls.pos += delta
 
-    # LERP CAM
     @classmethod
-    def lerp(cls, destination: pygame.Vector2):
+    def lerp(cls, destination):
         """Lerps the camera towards given coordinates"""
         # LERP = 1: camera is locked to player
         # LERP = 0: camera is still

@@ -1,23 +1,22 @@
-"""Stores the EntityManager class"""
+"""Da EntityManager class"""
 
-import player
-import entity_abc
-import bullet
+from player import Player
+from bullet import Bullet
 
 class EntityManager:
-    """Stores entity lists and allows for updating/drawing
-    all entities at once."""
+    """Stores all entitites and allows for mass updating/drawing"""
     entities = list()
     bullets = list()
-    players = list()
+
+    player = None
 
     is_updating = False
     added_entities = list()
 
-    @classmethod
-    def count(cls):
+    @property
+    def count(self):
         """Returns current number of entities"""
-        return len(cls.entities)
+        return len(self.entities)
 
     @classmethod
     def add(cls, entity):
@@ -35,15 +34,16 @@ class EntityManager:
         relevant lists"""
         cls.entities.append(entity)
 
-        if isinstance(entity, bullet.Bullet):
+        if isinstance(entity, Bullet):
             cls.bullets.append(entity)
-        elif isinstance(entity, bullet.Bullet):
-            cls.bullets.append(entity)
-        elif isinstance(entity, entity_abc.Entity):
-            pass
+        elif isinstance(entity, Player):
+            # This overwrites the player
+            cls.player = entity
         else:
-            # This should never happen
-            print(f"Error in EntityManager.add_entity, entity is\n{entity}")
+            # who cares
+            pass
+            #raise Exception("Entity of unknown type added\n"
+                #f"Entity is {entity}, type is {type(entity)}")
 
     @classmethod
     def update(cls):
@@ -64,10 +64,10 @@ class EntityManager:
 
         # Remove expired entities
         cls.entities = list(filter(lambda e: not e.is_expired, cls.entities))
-        cls.players = list(filter(lambda e: not e.is_expired, cls.players))
 
     @classmethod
-    def draw(cls):
+    def draw(cls, screen):
         """Draws all entities at once"""
         for entity in cls.entities:
-            entity.draw()
+            entity.draw(screen)
+
