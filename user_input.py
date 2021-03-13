@@ -58,3 +58,9 @@ class Input:
             return direction
         else:
             return direction.normalize()
+
+    @classmethod
+    def get_mouse_state(cls):
+        """Returns left/right click mouse button states"""
+        left_click, right_click, _ = pg.mouse.get_pressed(num_buttons=3)
+        return (left_click, right_click)
