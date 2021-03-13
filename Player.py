@@ -8,6 +8,7 @@ from combat_arts.burn import ArtBurn
 from combat_arts.burst import ArtBurst
 import entity_manager
 from camera import Camera
+import random
 from art import player_img
 
 class Player(Entity):
@@ -55,9 +56,14 @@ class Player(Entity):
             if (aim_unit != pg.Vector2(0, 0)
                 and self.cooldown_remaining <= 0):
                 self.cooldown_remaining = self.cooldown_frames
-                velocity = aim_unit * 5  # bullet_speed = 5
+
+                offset_angle = (random.random()-random.random())*5
+                velocity = aim_unit.rotate(offset_angle) * 5
                 offset_pos = self.pos + aim_unit * 5 + aim_unit.rotate(90) * 2.5
                 entity_manager.EntityManager.add(Bullet(offset_pos, velocity))
+
+                offset_angle = (random.random()-random.random())*5
+                velocity = aim_unit.rotate(offset_angle) * 5
                 offset_pos = self.pos + aim_unit * 5 - aim_unit.rotate(90) * 2.5
                 entity_manager.EntityManager.add(Bullet(offset_pos, velocity))
 
