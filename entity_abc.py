@@ -1,6 +1,7 @@
 """The Entity class. Stored as entity_abc.py because naming issues."""
 
 import pygame
+import camera
 from art import Default_sprite
 
 WHITE = (255, 255, 255)
@@ -25,8 +26,12 @@ class Entity(object):
     def draw(self):
         """Draw this entity on the screen"""
         screen = pygame.display.get_surface()
-        rotated = pygame.transform.rotate(
-            self.image, self.orientation)
-        rotated_rect = rotated.get_rect()
-        rotated_rect.center = self.pos
-        screen.blit(rotated, rotated_rect)
+
+        screen_pos = self.pos + pygame.Vector2(screen.get_size()) / 2 - camera.Camera.pos
+
+        # Rotate based on orientation
+        output = pygame.transform.rotate(self.image, self.orientation)
+        output_rect = output.get_rect()
+        output_rect.center = screen_pos
+
+        screen.blit(output, output_rect)

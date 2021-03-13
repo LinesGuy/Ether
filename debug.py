@@ -11,4 +11,3 @@ def text(output="Sample text", offset=0, colour=(255,255,255)):
     screen = pygame.display.get_surface()
     textsurface = myfont.render(f"{offset}: {output}", False, colour)
     screen.blit(textsurface,(0,offset*20))
-    

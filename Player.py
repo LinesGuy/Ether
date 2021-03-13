@@ -10,6 +10,7 @@ import user_input
 class Player(entity_abc.Entity):
     """Player class based off Entity class. This allows for multiple
     player objects but currently the game only supports one player."""
+    radius = 10
 
     def __init__(self, pos=pygame.Vector2(0, 0)):
         super().__init__(pos, Player_sprite)
@@ -17,7 +18,6 @@ class Player(entity_abc.Entity):
         self.cooldown_frames = 6
         self.cooldown_remaining = 0
         self.frames_until_respawn = 0
-        # ^ If false, player has to hold left click to NOT shoot.
 
     def is_dead(self):
         """Returns whether or not the player is dead based off their
