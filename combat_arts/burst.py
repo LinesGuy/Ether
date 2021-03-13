@@ -25,7 +25,7 @@ class ArtBurst(Bullet):
         if self.age > self.lifespan:
             for i in range(10):
                 bearing = random.random() * 360
-                velocity = pg.Vector2(1, 0).rotate(bearing) * 5
+                velocity = pg.Vector2(1, 0).rotate(bearing) * 4
                 entity_manager.EntityManager.add(Bullet(self.pos*1, velocity))
             self.is_expired = True
 
