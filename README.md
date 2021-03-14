@@ -5,9 +5,13 @@ A "game" written in PyGame that exists for me to test stuff.
 Install pygame and run main.py to run
 
 # Flexing
+Moving and shooting:
 ![Moving and shooting](https://i.imgur.com/YtqEgaD.gif)
+'Burn' combat art:
 !['Burn' combat art](https://i.imgur.com/ZwzKMSt.gif)
+'Burst' combat art:
 !['Burst' combat art](https://i.imgur.com/WBbhyx7.gif)
+Freecam:
 ![Freecam](https://i.imgur.com/b6ev4aB.gif)
 
 # Todo
