@@ -27,7 +27,15 @@ class Entity(object):
         screen_pos = Camera.get_pos_on_screen(self.pos)
 
         # Rotate
+
+        width, height = self.image.get_size()
+        new_width  = int(width * Camera.zoom)
+        new_height = int(height * Camera.zoom)
+        # Scale:
+        #output = pg.transform.scale(self.image, (new_width, new_height))
+        # Rotate:
         output = pg.transform.rotate(self.image, self.orientation)
+
         output_rect = output.get_rect()
         output_rect.center = screen_pos
 
