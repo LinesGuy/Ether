@@ -30,7 +30,7 @@ class ArtBurst(Bullet):
             self.is_expired = True
 
     def draw(self, screen):
-        screen_pos = self.pos - Camera.pos
+        screen_pos = Camera.get_pos_on_screen(self.pos)
 
         # Draw debug circle
         pg.draw.circle(screen, (0, 0, 255), screen_pos, 3)

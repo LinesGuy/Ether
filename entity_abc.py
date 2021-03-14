@@ -24,7 +24,7 @@ class Entity(object):
     def draw(self, screen):
         """Draw this entity on the screen"""
 
-        screen_pos = self.pos - Camera.pos
+        screen_pos = Camera.get_pos_on_screen(self.pos)
 
         # Rotate
         output = pg.transform.rotate(self.image, self.orientation)

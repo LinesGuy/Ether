@@ -33,7 +33,7 @@ class ArtBurn(Bullet):
 
 
     def draw(self, screen):
-        screen_pos = self.pos - Camera.pos
+        screen_pos = Camera.get_pos_on_screen(self.pos)
 
         # Draw debug circle
         pg.draw.circle(screen, (0, 255, 0), screen_pos, 3)
@@ -53,7 +53,7 @@ class MiniBomb(Entity):
             self.is_expired = True
 
     def draw(self, screen):
-        screen_pos = self.pos - Camera.pos
+        screen_pos = Camera.get_pos_on_screen(self.pos)
 
         # Temp red circle
         colour = (127 + int(self.age/self.lifespan*128), 0, 0)
@@ -73,7 +73,7 @@ class BombShockwave(Entity):
             self.is_expired = True
 
     def draw(self, screen):
-        screen_pos = self.pos - Camera.pos
+        screen_pos = Camera.get_pos_on_screen(self.pos)
 
         # Draw shockwave
         radius = 2 + self.age

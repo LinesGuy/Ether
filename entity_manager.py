@@ -13,10 +13,10 @@ class EntityManager:
     is_updating = False
     added_entities = list()
 
-    @property
-    def count(self):
+    @classmethod
+    def count(cls):
         """Returns current number of entities"""
-        return len(self.entities)
+        return len(cls.entities)
 
     @classmethod
     def add(cls, entity):

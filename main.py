@@ -50,6 +50,7 @@ while running:
 
     # DRAW
     EntityManager.draw(display)
+    pg.draw.circle(display, (255, 0, 0), Camera.get_pos_on_screen(Camera.get_mouse_coords()), 2)
 
     surf = pg.transform.scale(display, Camera.WINDOW_SIZE)
     screen.blit(surf, (0, 0))
@@ -59,6 +60,9 @@ while running:
     debug.text(screen, f"Camera.pos: {Camera.pos}", 1)
     if not Camera.is_lerping:
         debug.text(screen, "FREECAM ENABLED, Press 'c' to enable lerp", 2)
+    debug.text(screen, f"Camera.zoom: {Camera.zoom}", 3)
+    debug.text(screen, f"Mouse world pos: {Camera.get_mouse_coords()}", 4)
+    debug.text(screen, f"EntityManager.count: {EntityManager.count()}", 5)
 
     pg.display.update()
 
