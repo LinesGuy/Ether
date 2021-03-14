@@ -50,7 +50,10 @@ while running:
 
     # DRAW
     EntityManager.draw(display)
+
     pg.draw.circle(display, (255, 0, 0), Camera.get_pos_on_screen(Camera.get_mouse_coords()), 2)
+    # ^ Debug circle, gets mouse coords in the world then converts to screen coords.
+    # This is redundant but useful to see where things can go wrong.
 
     surf = pg.transform.scale(display, Camera.WINDOW_SIZE)
     screen.blit(surf, (0, 0))
