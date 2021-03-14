@@ -1,7 +1,7 @@
 """da Input class"""
 
 import pygame as pg
-from camera import Camera
+import camera
 
 class Input:
     """Functions for getting and handling user inputs"""
@@ -44,21 +44,6 @@ class Input:
             return direction.normalize()
 
     @classmethod
-    def move_camera(cls):
-        """Get arrow key inputs and move camera accordingly"""
-        direction = pg.Vector2(0, 0)
-        if cls.keys[pg.K_LEFT]:
-            direction.x -=1
-        if cls.keys[pg.K_RIGHT]:
-            direction.x += 1
-        if cls.keys[pg.K_UP]:
-            direction.y -= 1
-        if cls.keys[pg.K_DOWN]:
-            direction.y += 1
-        direction *= 5
-        Camera.move_relative(direction)
-
-    @classmethod
     def get_aim_bearing(cls, pos):
         """Returns an angle in degrees representing the aim bearing"""
         aim_direction = cls.get_aim_direction(pos)
@@ -67,7 +52,7 @@ class Input:
     @classmethod
     def get_aim_direction(cls, pos) -> pg.Vector2:
         """Returns a unit vector from a given position to the mouse position"""
-        mouse_pos = Camera.get_mouse_coords()
+        mouse_pos = camera.Camera.get_mouse_coords()
         direction = mouse_pos - pos
         if direction.length_squared()  == 0:
             return direction

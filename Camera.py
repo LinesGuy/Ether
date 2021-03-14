@@ -1,6 +1,8 @@
 """Stores the Camera class"""
 
 import pygame as pg
+import entity_manager
+import user_input
 
 class Camera:
     """Camera of the world with various functoins to move the camera
@@ -10,8 +12,40 @@ class Camera:
     PIXEL_SCALE = None
     DISPLAY_SIZE = None
 
+    is_lerping = True  # If false, camera can move freely.
+
     pos = pg.Vector2(0, 0)
     # ^ Represents the top-left of the screen
+
+    @classmethod
+    def update(cls):
+        """Various updates related to camera (lerp, move, etc)"""
+
+        # Freecam (disables lerp if used)
+        direction = pg.Vector2(0, 0)
+        keys = user_input.Input.keys
+        if keys[pg.K_LEFT]:
+            direction.x -=1
+        if keys[pg.K_RIGHT]:
+            direction.x += 1
+        if keys[pg.K_UP]:
+            direction.y -= 1
+        if keys[pg.K_DOWN]:
+            direction.y += 1
+        if direction != pg.Vector2(0, 0):
+            cls.is_lerping = False
+            direction *= 5
+            Camera.move_relative(direction)
+
+        # Lerp
+        if cls.is_lerping:
+            Camera.lerp(entity_manager.EntityManager.player.pos
+                - pg.Vector2(Camera.DISPLAY_SIZE) / 2)
+        else:
+            # 'c' to enable lerp
+            if user_input.Input.keys[pg.K_c]:
+                cls.is_lerping = True
+
 
     @classmethod
     def set_dimensions(cls, WINDOW_SIZE: tuple, scale: int):
