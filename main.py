@@ -6,6 +6,10 @@ from player import Player
 import debug
 import time
 
+# TEMP
+from entity_abc import Entity
+import random
+
 # INIT
 pg.init()
 clock = pg.time.Clock()
@@ -14,6 +18,11 @@ screen = pg.display.set_mode(Camera.WINDOW_SIZE)
 display = pg.Surface(Camera.DISPLAY_SIZE)
 EntityManager.add(Player())
 frame = 0
+
+# TEMP INIT
+for i in range(10):
+    EntityManager.add(Entity(
+        (random.randint(-200, 200), random.randint(-100, 100))))
 # INIT END
 
 running = True
