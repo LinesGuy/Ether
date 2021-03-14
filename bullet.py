@@ -8,7 +8,7 @@ class Bullet(Entity):
     """Bullet class based off Entity class. Bullets can be fired from enemies
     or players. Expires after 5 seconds or if off-screen."""
 
-    def __init__(self, pos, velocity, lifespan=300):
+    def __init__(self, pos, velocity, lifespan=120):
         super().__init__(pos, bullet_img)
         self.velocity = velocity
         self.orientation = velocity.angle_to(pg.Vector2(0, 0))  # Degrees
