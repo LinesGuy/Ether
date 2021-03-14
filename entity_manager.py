@@ -50,7 +50,7 @@ class EntityManager:
         """Updates all entities at once and removes any expired entities"""
         cls.is_updating = True
 
-        # Handle collisions
+        # todo Handle collisions here
 
         for entity in cls.entities:
             entity.update()
@@ -64,6 +64,7 @@ class EntityManager:
 
         # Remove expired entities
         cls.entities = list(filter(lambda e: not e.is_expired, cls.entities))
+        cls.bullets = list(filter(lambda e: not e.is_expired, cls.bullets))
 
     @classmethod
     def draw(cls, screen):
