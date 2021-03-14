@@ -33,8 +33,8 @@ while running:
                 running = False
 
     Input.update()
-    Input.move_camera()  # Probably can be moved to Input.update()
-    Camera.lerp(EntityManager.player.pos - pg.Vector2(Camera.DISPLAY_SIZE) / 2)
+    Camera.update()  # Lerp / move camera
+
     EntityManager.update()
 
     # UPDATE END
@@ -44,10 +44,15 @@ while running:
 
     surf = pg.transform.scale(display, Camera.WINDOW_SIZE)
     screen.blit(surf, (0, 0))
-    debug.text(f"Camera.pos: {Camera.pos}")
+
+    # Debug stuffs
+    debug.text(screen, f"{round((time.time() - start_time)*1000, 3)}, ms per frame", 0)
+    debug.text(screen, f"Camera.pos: {Camera.pos}", 1)
+    if not Camera.is_lerping:
+        debug.text(screen, "FREECAM ENABLED, Press 'c' to enable lerp", 2)
+
     pg.display.update()
 
     # DRAW END
-    if frame % 60 == 0: print(round((time.time() - start_time)*1000, 3), "ms")
 
     clock.tick(60)
