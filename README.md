@@ -17,10 +17,14 @@ Freecam:
 ![Freecam](https://i.imgur.com/b6ev4aB.gif)
 1000 entitites (~50 FPS while recording, 60 when not recording)
 ![1000 entities](https://i.imgur.com/Sf13tyK.gif)
+Zooming (wihout sprite scaling):
+![Zooming no scale](https://i.imgur.com/OTtS6IJ.gif)
+Zooming (with sprite scaling):
+![Zooming with scale](https://i.imgur.com/bXyNShZ.gif)
 
 # Todo
 - Add enemies and enemy spawners
 - Add more "combat arts"
 - Add gridlines or some kind of background (starfield?)
-- Maybe add zooming and rotating camera just because I can
+- Maybe add ~~zooming and~~ rotating camera just because I can (zooming added)
 - maybe maybe maybe maybe maybe maybe maybe multihreading
